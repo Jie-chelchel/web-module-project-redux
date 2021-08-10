@@ -1,7 +1,11 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteMovie, addToFavoriteMovie } from "../actions/movieActions";
+import {
+  deleteMovie,
+  addToFavoriteMovie,
+  removeFromFavoriteMovie,
+} from "../actions/movieActions";
 const Movie = (props) => {
   const { id } = useParams();
   const { push } = useHistory();
@@ -11,6 +15,7 @@ const Movie = (props) => {
 
   const deleteMovilHandler = () => {
     props.deleteMovie(movie.id);
+    props.removeFromFavoriteMovie(movie.id);
     push("/movies");
   };
 
@@ -86,6 +91,7 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies.movies,
     displayFavorites: state.favoriteMovies.displayFavorites,
+    favoriteMovies: state.favoriteMovies.favorites,
   };
 };
 
@@ -93,6 +99,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     deleteMovie: (id) => dispatch(deleteMovie(id)),
     addFavorite: (movie) => dispatch(addToFavoriteMovie(movie)),
+    removeFromFavoriteMovie: (id) => dispatch(removeFromFavoriteMovie(id)),
   };
 };
 
