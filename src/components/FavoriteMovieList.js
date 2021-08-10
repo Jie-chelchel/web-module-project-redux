@@ -5,19 +5,14 @@ import { removeFromFavoriteMovie } from "../actions/movieActions";
 
 const FavoriteMovieList = (props) => {
   const favorites = props.favoriteMovies;
-  const removeFavoriteHandler = (e, id) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log("ddd");
-    console.log(e.target.value);
-
-    // props.removeFromFavoriteMovie(id);
-  };
 
   return (
     <div className="col-xs savedContainer">
       <h5>Favorite Movies</h5>
       {favorites.map((movie) => {
+        if (!movie) {
+          return null;
+        }
         return (
           <div key={movie.id}>
             <Link
@@ -26,9 +21,7 @@ const FavoriteMovieList = (props) => {
             >
               {movie.title}
               <span
-                onClick={(e) => {
-                  //   e.preventDefault();
-                  //   e.stopPropagation();
+                onClick={() => {
                   props.removeFromFavoriteMovie(movie.id);
                 }}
               >

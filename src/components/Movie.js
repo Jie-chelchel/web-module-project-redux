@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteMovie, addT0FavoriteMovie } from "../actions/movieActions";
+import { deleteMovie, addToFavoriteMovie } from "../actions/movieActions";
 const Movie = (props) => {
   const { id } = useParams();
   const { push } = useHistory();
@@ -92,7 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteMovie: (id) => dispatch(deleteMovie(id)),
-    addFavorite: (movie) => dispatch(addT0FavoriteMovie(movie)),
+    addFavorite: (movie) => dispatch(addToFavoriteMovie(movie)),
   };
 };
 
