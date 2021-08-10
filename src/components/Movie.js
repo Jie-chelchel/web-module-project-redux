@@ -20,7 +20,7 @@ const Movie = (props) => {
   };
 
   const favoriteMovieHandler = (e) => {
-    props.addFavorite(movie);
+    props.addToFavoriteMovie(movie);
   };
 
   return (
@@ -95,12 +95,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteMovie: (id) => dispatch(deleteMovie(id)),
-    addFavorite: (movie) => dispatch(addToFavoriteMovie(movie)),
-    removeFromFavoriteMovie: (id) => dispatch(removeFromFavoriteMovie(id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Movie);
+export default connect(mapStateToProps, {
+  deleteMovie,
+  addToFavoriteMovie,
+  removeFromFavoriteMovie,
+})(Movie);

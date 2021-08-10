@@ -25,7 +25,7 @@ const AddMovieForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addNewMovie({ ...movie, id: Date.now() });
+    props.addMovie({ ...movie, id: Date.now() });
     push("/movies");
   };
 
@@ -107,12 +107,4 @@ const AddMovieForm = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addNewMovie: (newMovie) => {
-      dispatch(addMovie(newMovie));
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(AddMovieForm);
+export default connect(null, { addMovie })(AddMovieForm);

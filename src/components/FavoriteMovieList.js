@@ -36,15 +36,11 @@ const FavoriteMovieList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.favoriteMovies.favorites);
   return {
     favoriteMovies: state.favoriteMovies.favorites,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeFromFavoriteMovie: (id) => dispatch(removeFromFavoriteMovie(id)),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(FavoriteMovieList);
+export default connect(mapStateToProps, { removeFromFavoriteMovie })(
+  FavoriteMovieList
+);

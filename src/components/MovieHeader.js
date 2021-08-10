@@ -14,7 +14,7 @@ const MovieHeader = (props) => {
         </div>
         <div className="col-sm-6 headerBar">
           <div className="btn btn-sm btn-primary">
-            <span onClick={props.toggleDisplayFavorites}>
+            <span onClick={props.toggleFavoriteMovie}>
               {props.displayFavorites ? "Hide" : "Show"} Favorites
             </span>
           </div>
@@ -38,10 +38,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleDisplayFavorites: () => dispatch(toggleFavoriteMovie()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieHeader);
+export default connect(mapStateToProps, { toggleFavoriteMovie })(MovieHeader);
