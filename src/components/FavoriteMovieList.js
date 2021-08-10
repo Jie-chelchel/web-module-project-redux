@@ -1,9 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { removeFromFavoriteMovie } from "../actions/movieActions";
 
 const FavoriteMovieList = (props) => {
   const favorites = props.favoriteMovies;
+  const removeFavoriteHandler = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("ddd");
+    console.log(e.target.value);
+
+    // props.removeFromFavoriteMovie(id);
+  };
 
   return (
     <div className="col-xs savedContainer">
@@ -16,7 +25,13 @@ const FavoriteMovieList = (props) => {
               to={`/movies/${movie.id}`}
             >
               {movie.title}
-              <span>
+              <span
+                onClick={(e) => {
+                  //   e.preventDefault();
+                  //   e.stopPropagation();
+                  props.removeFromFavoriteMovie(movie.id);
+                }}
+              >
                 <span className="material-icons">remove_circle</span>
               </span>
             </Link>
@@ -33,4 +48,10 @@ const mapStateToProps = (state) => {
     favoriteMovies: state.favoriteMovies.favorites,
   };
 };
-export default connect(mapStateToProps)(FavoriteMovieList);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFromFavoriteMovie: (id) => dispatch(removeFromFavoriteMovie(id)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteMovieList);
